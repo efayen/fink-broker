@@ -2,6 +2,7 @@ name: Sentinel
 
 on:
   workflow_dispatch:
+  push:
 #  schedule:
 #    # At 05:00 UTC on every day-of-week from Monday through Friday.
 #    - cron:  '0 5 * * 1-5'
@@ -12,7 +13,8 @@ on:
 
 jobs:
   test-suite:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+    #runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -21,8 +23,8 @@ jobs:
     container:
       image: ${{ matrix.container }}
 
-    env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+#    env:
+#      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
     steps:
     - uses: actions/checkout@v2
@@ -78,7 +80,7 @@ jobs:
         fink_simulator -c ${FINK_HOME}/conf/fink_alert_simulator.conf
         fink_test -c conf/fink.conf.prod
         curl -s https://codecov.io/bash | bash
-    - uses: act10ns/slack@v1
-      with:
-        status: ${{ job.status }}
-      if: always()
+#    - uses: act10ns/slack@v1
+#      with:
+#        status: ${{ job.status }}
+#      if: always()
