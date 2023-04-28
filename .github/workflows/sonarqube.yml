@@ -20,8 +20,8 @@ jobs:
       uses: sonarsource/sonarcloud-github-action@master
       with:
         args: >
-          -Dsonar.organization=astrolabsoftware
-          -Dsonar.projectKey=finkbroker
+          -Dsonar.organization=efayen
+          -Dsonar.projectKey=efayen_fink-broker
           -Dsonar.sources=fink_broker/,bin/
           -Dsonar.issue.ignore.multicriteria.j1.ruleKey=python:S107,python:S1192
           -Dsonar.test.exclusions=fink_broker/htmlcov,fink_broker/slackUtils.py
