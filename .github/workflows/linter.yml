@@ -21,6 +21,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Patch for setup-python
+      run: |
+        #sudo apt update
+        #sudo apt install -y libssl-dev
+        echo "Do nothing !"
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
       with:
