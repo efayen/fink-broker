@@ -1,6 +1,8 @@
 name: SonarQube
 
-on: [workflow_dispatch, push]
+on: 
+  workflow_dispatch:
+  #push:
 #on:
 #  push:
 #    branches:
