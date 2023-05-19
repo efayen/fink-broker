@@ -2,7 +2,7 @@ name: Sentinel
 
 on:
   workflow_dispatch:
-#    push:
+  push:
 #  schedule:
 #    # At 05:00 UTC on every day-of-week from Monday through Friday.
 #    - cron:  '0 5 * * 1-5'
