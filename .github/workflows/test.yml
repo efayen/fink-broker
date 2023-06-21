@@ -13,7 +13,7 @@ on:
 
 jobs:
   test-suite:
-    runs-on: self-hosted
+    runs-on: [self-hosted, magnum]
     #runs-on: ubuntu-latest
 
     strategy:

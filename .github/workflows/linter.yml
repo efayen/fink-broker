@@ -2,7 +2,7 @@ name: PEP8
 
 on:
   workflow_dispatch:
-  #push:
+  push:
 #    branches:
 #      - master
 #  pull_request:
@@ -11,7 +11,7 @@ jobs:
   build:
 
     #runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: [self-hosted, magnum]
     strategy:
       matrix:
         python-version: [3.7, 3.9]

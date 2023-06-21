@@ -2,7 +2,7 @@ name: SonarQube
 
 on: 
   workflow_dispatch:
-      #push:
+  push:
 #on:
 #  push:
 #    branches:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   sonarcloud:
-    runs-on: self-hosted
+    runs-on: [self-hosted, magnum]
     #runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3

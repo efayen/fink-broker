@@ -10,7 +10,8 @@ on:
 jobs:
   build:
     name: Build image
-    runs-on: ubuntu-22.04
+    #runs-on: ubuntu-22.04
+    runs-on: [self-hosted, k8s-aware]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -40,7 +41,8 @@ jobs:
           path: artifacts
   itest:
     name: Run integration tests
-    runs-on: ubuntu-22.04
+    #runs-on: ubuntu-22.04
+    runs-on: [self-hoster, k8s-aware]
     needs: build
     steps:
       - name: Checkout code
@@ -54,10 +56,18 @@ jobs:
           echo "FINK_ALERT_SIMULATOR_DIR=$(. ./conf.sh && echo $FINK_ALERT_SIMULATOR_DIR)" >> $GITHUB_ENV
       - name: Clone fink-alert-simulator code
         run: ./itest/clone-fink-alert-simulator.sh
-      - name: Create k8s/kind cluster
-        run: |
-          git clone --depth 1 -b "k8s-1.25.0" --single-branch https://github.com/k8s-school/kind-helper.git
-          ./kind-helper/k8s-create.sh -s
+
+      # We will use our K8s cluster, so we don't need to set one up with
+      # kind-helper.
+      
+      #- name: Create k8s/kind cluster
+      #  run: |
+      #    git clone --depth 1 -b "k8s-1.25.0" --single-branch https://github.com/k8s-school/kind-helper.git
+      #    ./kind-helper/k8s-create.sh -s
+       
+      # Here it seems that they are pulling docker images and adding them to a
+      # local docker registry set up by kind. We might need to set up a docker
+      # registry for our cluster as well.
       - name: Load fink-alert-simulator image inside kind
         run: |
           DIR="${{ env.FINK_ALERT_SIMULATOR_DIR }}"
