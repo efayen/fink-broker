@@ -11,7 +11,7 @@ jobs:
   build:
     name: Build image
     #runs-on: ubuntu-22.04
-    runs-on: [self-hosted, k8s-aware]
+    runs-on: [self-hosted, k8s-aware, magnum]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -42,7 +42,7 @@ jobs:
   itest:
     name: Run integration tests
     #runs-on: ubuntu-22.04
-    runs-on: [self-hoster, k8s-aware]
+    runs-on: [self-hosted, k8s-aware, magnum]
     needs: build
     steps:
       - name: Checkout code
@@ -109,7 +109,8 @@ jobs:
           ./itest/itest.sh
   image-analysis:
     name: Analyze image
-    runs-on: ubuntu-22.04
+    #runs-on: ubuntu-22.04
+    runs-on: [self-hosted, k8s-aware, magnum]
     permissions:
       security-events: write
     needs: build
